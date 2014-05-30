@@ -38,7 +38,7 @@ namespace Ponomarikova.Nsudotnet.Rss2Email
             timer.Interval = 1000 * 60;
             timer.Enabled = true;
 
-            while (true) ;
+            Console.ReadLine();
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
