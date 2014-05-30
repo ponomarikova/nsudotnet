@@ -38,12 +38,12 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
                 {
                     while (true)
                     {
-                        int startIndex = currentLine.IndexOf(COMMENT_START_STR);
-                        int endIndex = currentLine.IndexOf(COMMENT_END_STR);
+                        int startIndex = currentLine.IndexOf(commentStartStr);
+                        int endIndex = currentLine.IndexOf(commentEndStr);
 
                         if (startIndex >= 0 && endIndex >= 0 && startIndex < endIndex)
                         {
-                            currentLine = currentLine.Remove(startIndex, endIndex - startIndex + COMMENT_END_STR.Length);
+                            currentLine = currentLine.Remove(startIndex, endIndex - startIndex + commentEndStr.Length);
                         }
                         else
                         {
@@ -52,9 +52,9 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
                     }
                 }
 
-                int commentStartIndex = currentLine.IndexOf(COMMENT_START_STR);
-                int commentEndIndex = currentLine.IndexOf(COMMENT_END_STR);
-                int commentIndex = currentLine.IndexOf(COMMENT_STR);
+                int commentStartIndex = currentLine.IndexOf(commentStartStr);
+                int commentEndIndex = currentLine.IndexOf(commentEndStr);
+                int commentIndex = currentLine.IndexOf(commentStr);
 
                 if (currentLine.Length == 0)
                 {
@@ -102,7 +102,7 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
                     {
                         isComment = false;
 
-                        currentLine = currentLine.Substring(commentEndIndex + COMMENT_END_STR.Length);
+                        currentLine = currentLine.Substring(commentEndIndex + commentEndStr.Length);
                         currentLine = currentLine.Trim();
                         if (currentLine.Length == 0)
                         {
@@ -121,8 +121,8 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
             return count;
         }
 
-        private static string COMMENT_STR = "//";
-        private static string COMMENT_START_STR = "/*";
-        private static string COMMENT_END_STR = "*/";
+        private static string commentStr = "//";
+        private static string commentStartStr = "/*";
+        private static string commentEndStr = "*/";
     }
 }

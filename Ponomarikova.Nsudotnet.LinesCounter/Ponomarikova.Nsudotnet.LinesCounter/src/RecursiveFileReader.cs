@@ -9,23 +9,23 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
 {
     class RecursiveFileReader
     {
-        public RecursiveFileReader(string path, string ext)
+        public RecursiveFileReader(string path, string extension)
         {
-            m_nextDirs.Add(path);
-            m_ext = ext;
+            nextDirs.Add(path);
+            ext = extension;
         }
 
         public string[] GetNextFile()
         {
             while (true)
             {
-                while (m_nextFiles.Count == 0)
+                while (nextFiles.Count == 0)
                 {
-                    if (m_nextDirs.Count > 0)
+                    if (nextDirs.Count > 0)
                     {
-                        m_nextFiles.AddRange(Directory.GetFiles(m_nextDirs[0]));
-                        m_nextDirs.AddRange(Directory.GetDirectories(m_nextDirs[0]));
-                        m_nextDirs.RemoveAt(0);
+                        nextFiles.AddRange(Directory.GetFiles(nextDirs[0]));
+                        nextDirs.AddRange(Directory.GetDirectories(nextDirs[0]));
+                        nextDirs.RemoveAt(0);
                     }
                     else
                     {
@@ -33,18 +33,18 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
                     }
                 }
 
-                string fileName = m_nextFiles[0];
-                m_nextFiles.RemoveAt(0);
+                string fileName = nextFiles[0];
+                nextFiles.RemoveAt(0);
 
-                if (Path.GetExtension(fileName).Equals(m_ext))
+                if (Path.GetExtension(fileName).Equals(ext))
                 {
                     return File.ReadAllLines(fileName);
                 }
             }
         }
 
-        private List<string> m_nextFiles = new List<string>();
-        private List<string> m_nextDirs = new List<string>();
-        private string m_ext;
+        private List<string> nextFiles = new List<string>();
+        private List<string> nextDirs = new List<string>();
+        private string ext;
     }
 }
