@@ -9,19 +9,13 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
 {
     class RecursiveFileReader
     {
-        public RecursiveFileReader(string path, string extension)
+        public static List<string> GetFileNames(string path, string ext)
         {
+            List<string> nextFiles = new List<string>();
+            List<string> nextDirs = new List<string>();
             nextDirs.Add(path);
-            ext = extension;
-        }
 
-        public StreamReader GetNextFile()
-        {
-            if (lastFile != null)
-            {
-                lastFile.Dispose();
-                lastFile = null;
-            }
+            List<string> files = new List<string>();
 
             while (true)
             {
@@ -35,8 +29,13 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
                     }
                     else
                     {
-                        return null;
+                        break;
                     }
+                }
+
+                if (nextFiles.Count == 0)
+                {
+                    break;
                 }
 
                 string fileName = nextFiles[0];
@@ -44,15 +43,11 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
 
                 if (Path.GetExtension(fileName).Equals(ext))
                 {
-                    lastFile = new StreamReader(fileName);
-                    return lastFile;
+                    files.Add(fileName);
                 }
             }
-        }
 
-        private List<string> nextFiles = new List<string>();
-        private List<string> nextDirs = new List<string>();
-        private string ext;
-        private StreamReader lastFile = null;
+            return files;
+        }
     }
 }

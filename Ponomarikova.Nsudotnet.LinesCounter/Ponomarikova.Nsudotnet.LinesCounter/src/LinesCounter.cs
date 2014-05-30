@@ -13,12 +13,14 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
         {
             int count = 0;
 
-            RecursiveFileReader files = new RecursiveFileReader(path, ext);
+            List<string> files = RecursiveFileReader.GetFileNames(path, ext);
 
-            StreamReader currentFile = null;
-            while ((currentFile = files.GetNextFile()) != null)
+            foreach (string it in files)
             {
-                count += CountLinesInStream(currentFile);
+                using (StreamReader currentFile = new StreamReader(it))
+                {
+                    count += CountLinesInStream(currentFile);
+                }
             }
 
             return count;
