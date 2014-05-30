@@ -15,22 +15,24 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
 
             RecursiveFileReader files = new RecursiveFileReader(path, ext);
 
-            string[] currentFile = null;
+            StreamReader currentFile = null;
             while ((currentFile = files.GetNextFile()) != null)
             {
-                count += CountLinesInText(currentFile);
+                count += CountLinesInStream(currentFile);
             }
 
             return count;
         }
 
-        private static int CountLinesInText(string[] text)
+        private static int CountLinesInStream(StreamReader stream)
         {
             int count = 0;
 
             bool isComment = false;
 
-            foreach (string line in text)
+            string line;
+
+            while ((line = stream.ReadLine()) != null)
             {
                 string currentLine = line.Trim();
 

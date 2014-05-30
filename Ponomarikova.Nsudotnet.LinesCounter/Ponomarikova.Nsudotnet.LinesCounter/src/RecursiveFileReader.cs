@@ -15,8 +15,14 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
             ext = extension;
         }
 
-        public string[] GetNextFile()
+        public StreamReader GetNextFile()
         {
+            if (lastFile != null)
+            {
+                lastFile.Dispose();
+                lastFile = null;
+            }
+
             while (true)
             {
                 while (nextFiles.Count == 0)
@@ -38,7 +44,8 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
 
                 if (Path.GetExtension(fileName).Equals(ext))
                 {
-                    return File.ReadAllLines(fileName);
+                    lastFile = new StreamReader(fileName);
+                    return lastFile;
                 }
             }
         }
@@ -46,5 +53,6 @@ namespace Ponomarikova.Nsudotnet.LinesCounter
         private List<string> nextFiles = new List<string>();
         private List<string> nextDirs = new List<string>();
         private string ext;
+        private StreamReader lastFile = null;
     }
 }
