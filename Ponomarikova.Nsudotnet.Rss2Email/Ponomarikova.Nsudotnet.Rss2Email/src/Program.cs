@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace Ponomarikova.Nsudonet.Rss2Email
+namespace Ponomarikova.Nsudotnet.Rss2Email
 {
     class Program
     {

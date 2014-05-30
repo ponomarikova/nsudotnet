@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ponomarikova.Nsudonet.Rss2Email
+namespace Ponomarikova.Nsudotnet.Rss2Email
 {
     static class SMTPUtils
     {
@@ -19,7 +19,7 @@ namespace Ponomarikova.Nsudonet.Rss2Email
             client.Credentials = new System.Net.NetworkCredential(from, password);
             client.EnableSsl = true;
 
-            client.Send(message);            
+            client.Send(message);
         }
     }
 }
