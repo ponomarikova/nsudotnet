@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Ponomarikova.Nsudotnet.Rss2Email
+namespace Ponomarikova.Nsudonet.Rss2Email
 {
     static class XMLUtils
     {
@@ -21,7 +21,7 @@ namespace Ponomarikova.Nsudotnet.Rss2Email
                     switch (reader.NodeType)
                     {
                         case XmlNodeType.Element:
-                            switch (reader.Name)
+                            switch(reader.Name)
                             {
                                 case "title":
                                     text.Append("Title : ");
@@ -39,7 +39,7 @@ namespace Ponomarikova.Nsudotnet.Rss2Email
                             break;
 
                         case XmlNodeType.Text:
-                            if (isText)
+                            if(isText)
                             {
                                 text.AppendLine(reader.Value);
                                 isText = false;
